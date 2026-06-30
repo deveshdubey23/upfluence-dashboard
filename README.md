@@ -31,7 +31,7 @@ Each specialized tab embeds industry-specific B2C data layers:
 
 ## 💎 Premium UX Features
 
-* **Multi-Creator Side-by-Side Comparison Modals:** Select two or more profiles simultaneously across tabs to display relative progress matchup bars and dynamically identify metric leaders (awarded a 🏆).
+* **Multi-Creator Side-by-Side Comparison Modals:** Select two or more profiles simultaneously across tabs to display relative progress matchup bars and dynamically identify metric leaders (awarded with a 🏆).
 * **Interactive Creator Deep-Dives:** Click any row to slide open a granular profile detailing biographies, recent sponsors, 30-day growth curves, audience demographics (age/gender splits), and direct booking reservation requests.
 * **Programmatic Metric Tooltips:** Hovering over any performance attribute instantly displays its metric definition, marketing justification, industry benchmarks, and the creator's cohort percentile calculation.
 * **Persistent Shortlists:** Built-in bookmarked "Saved Lists" safely preserve curated influencer shortlists directly inside local storage across page refreshes.
