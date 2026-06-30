@@ -1,8 +1,7 @@
 # 📦 Official Submission Deliverables
 
-## 🌐 Public Deployment & Repository Access
+## 🌐 Public Deployment
 * **Public Live Production URL:** [https://upfluence-henna.vercel.app](https://upfluence-henna.vercel.app)
-* **GitHub Repository:** [https://github.com/deveshdubey23/upfluence-dashboard/](https://github.com/deveshdubey23/upfluence-dashboard/)
 
 ---
 
