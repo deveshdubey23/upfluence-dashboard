@@ -78,7 +78,7 @@ Make rows clickable to slide open a deep-dive profile containing growth trends, 
 ---
 
 ## 🧮 Ranking Methodology & Rationale
-### 1. Algorithmic Ranking Philosophy: The USS Index
+### Algorithmic Ranking Philosophy: The USS Index
 Instead of sorting creators by naive follower size—which is highly susceptible to bot inflation—the dashboard introduces a custom-weighted multi-criteria composite matrix called the **Upfluence Synergy Score (USS)**. By default, it evaluates performance out of a maximum score of 100 based on four primary behavioral signals:
 
 $$USS = (0.40 \times \text{Engagement}) + (0.30 \times \text{Authenticity}) + (0.20 \times \text{Frequency}) + (0.10 \times \text{Reach})$$
@@ -94,26 +94,16 @@ $$USS = (0.40 \times \text{Engagement}) + (0.30 \times \text{Authenticity}) + (0
 ## 🚀 Local Installation Setup
 
 1. Clone the project repository:
-
-git clone https://github.com/deveshdubey23/upfluence-dashboard.git
-cd upfluence-dashboard
-
-
-
-⚙️ Setup & Local Installation
-
-Clone the project repository:
-
+```bash
 git clone [https://github.com/deveshdubey23/upfluence-dashboard.git](https://github.com/deveshdubey23/upfluence-dashboard.git)
 cd upfluence-dashboard
-
-
-Install dependency assets:
+```
+2. Install dependency assets:
 
 npm install
 
 
-Configure environment variable keys:
+3. Configure environment variable keys:
 Create an .env.local file in your root workspace:
 
 UPFLUENCE_CLIENT_ID=your_real_id
