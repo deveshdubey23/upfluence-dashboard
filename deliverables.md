@@ -95,19 +95,32 @@ $$USS = (0.40 \times \text{Engagement}) + (0.30 \times \text{Authenticity}) + (0
 
 1. Clone the project repository:
 
-git clone <your-github-repo-url>
-cd upfluence-vetting-dashboard
+git clone https://github.com/deveshdubey23/upfluence-dashboard.git
+cd upfluence-dashboard
 
-2. Install dependency assets:
+
+
+⚙️ Setup & Local Installation
+
+Clone the project repository:
+
+git clone [https://github.com/deveshdubey23/upfluence-dashboard.git](https://github.com/deveshdubey23/upfluence-dashboard.git)
+cd upfluence-dashboard
+
+
+Install dependency assets:
 
 npm install
 
-3. Configure environment variable keys: Create an .env.local file in your root workspace:
+
+Configure environment variable keys:
+Create an .env.local file in your root workspace:
 
 UPFLUENCE_CLIENT_ID=your_real_id
 UPFLUENCE_CLIENT_SECRET=your_real_secret
 
-4. Boot up the local engineering server:
+
+Boot up the local engineering server:
 
 npm run dev
 
