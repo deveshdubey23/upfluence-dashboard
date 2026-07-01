@@ -110,7 +110,7 @@ UPFLUENCE_CLIENT_ID=your_real_id
 UPFLUENCE_CLIENT_SECRET=your_real_secret
 
 
-Boot up the local engineering server:
+4. Boot up the local engineering server:
 
 npm run dev
 
