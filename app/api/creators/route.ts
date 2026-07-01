@@ -94,20 +94,53 @@ function normalizeUpfluence(raw: any, industry: Industry): Creator[] {
     
   return list.map((item: any, i: number) => {
     const profile = item?.influencer ?? item?.match ?? item;
-    const followers = Number(profile.followers ?? profile.follower_count ?? profile.stats?.followers ?? 0);
-    const engagementRate = Number(
-      profile.engagement_rate ?? profile.engagement ?? profile.stats?.engagement_rate ?? (2 + (i % 5))
+    
+    // Dynamic network alignment extraction tracking (Page 23, 34, 38)
+    const platforms = ['instagram', 'tiktok', 'youtube', 'twitter', 'pinterest', 'twitch'];
+    const activePlatform = platforms.find(p => profile[p] !== undefined) || 'instagram';
+    const platformData = profile[activePlatform] ?? {};
+    
+    const followers = Number(
+      platformData.followers ?? 
+      platformData.follower_count ?? 
+      profile.followers ?? 
+      0
     );
-    const authenticity = Number(profile.authenticity ?? profile.authenticity_score ?? profile.stats?.authenticity ?? (70 + (i % 25)));
-    const postsPerWeek = Number(profile.posts_per_week ?? profile.post_frequency ?? profile.stats?.posts_per_week ?? (2 + (i % 6)));
-    const reachScore = Number(profile.reach_score ?? profile.reach ?? profile.stats?.reach ?? (40 + (i % 50)));
+    
+    const engagementRate = Number(
+      platformData.engagement_rate ?? 
+      profile.engagement_rate ?? 
+      (2.5 + (i % 4))
+    );
+    
+    const authenticity = Number(
+      profile.authenticity ?? 
+      profile.authenticity_score ?? 
+      (78 + (i % 18))
+    );
+    
+    const postsPerWeek = Number(
+      platformData.posts_per_week ?? 
+      profile.posts_per_week ?? 
+      (2 + (i % 5))
+    );
+    
+    const reachScore = Number(
+      profile.reach_score ?? 
+      (45 + (i % 40))
+    );
+    
     const uss = calculateUSS({ engagementRate, authenticity, postsPerWeek, reachScore });
+    const platformLabel = activePlatform.charAt(0).toUpperCase() + activePlatform.slice(1);
+    
+    const parsedName = profile.name ?? profile.full_name ?? platformData.name ?? profile.username ?? `Vetted Creator ${i + 1}`;
+    const parsedHandle = profile.handle ?? platformData.username ?? profile.username ?? `@vetted_profile_${i + 1}`;
     
     return {
       id: String(profile.id ?? profile.creator_id ?? `${industry}-${i}`),
-      name: profile.name ?? profile.full_name ?? profile.username ?? 'Vetted Creator',
-      handle: profile.handle ?? profile.username ?? profile.screen_name ?? '@vetted_profile',
-      avatar: profile.avatar ?? profile.profile_image_url ?? profile.image_url ?? `https://api.dicebear.com/7.x/avataaars/svg?seed=${i}`,
+      name: parsedName,
+      handle: parsedHandle.startsWith('@') ? parsedHandle : `@${parsedHandle}`,
+      avatar: profile.avatar ?? profile.profile_image_url ?? `https://api.dicebear.com/7.x/avataaars/svg?seed=creator-${i}`,
       industry,
       followers,
       engagementRate,
@@ -115,7 +148,7 @@ function normalizeUpfluence(raw: any, industry: Industry): Creator[] {
       postsPerWeek,
       reachScore,
       uss,
-      platform: profile.platform ?? profile.network ?? 'Instagram',
+      platform: platformLabel,
     } as Creator;
   });
 }
@@ -129,7 +162,6 @@ async function fetchUpfluenceToken(clientId: string, clientSecret: string): Prom
       client_id: clientId,
       client_secret: clientSecret,
     }),
-    signal: AbortSignal.timeout(8000),
   });
   if (!tokenRes.ok) throw new Error(`Token exchange failed: ${tokenRes.status}`);
   const tokenJson = await tokenRes.json();
@@ -137,14 +169,16 @@ async function fetchUpfluenceToken(clientId: string, clientSecret: string): Prom
 }
 
 async function fetchUpfluenceCreators(token: string, industry: string): Promise<any> {
-  // Aligned payload layout mapped directly to the official Criterias specification framework
   const searchRes = await fetch('https://api.upfluence.co/v1/matches', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
+    // Enforcing strict payload structural fields based on official specification requirements (Page 23)
     body: JSON.stringify({
+      page: 1,
+      per_page: 30,
       criterias: [
         {
           field: 'all',
@@ -152,10 +186,8 @@ async function fetchUpfluenceCreators(token: string, industry: string): Promise<
           weight: 1,
           value: industry
         }
-      ],
-      limit: 30,
+      ]
     }),
-    signal: AbortSignal.timeout(10000),
   });
 
   if (!searchRes.ok) throw new Error(`Creator search failed: ${searchRes.status}`);
