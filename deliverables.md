@@ -95,7 +95,7 @@ $$USS = (0.40 \times \text{Engagement}) + (0.30 \times \text{Authenticity}) + (0
 
 1. Clone the project repository:
 ```bash
-git clone [https://github.com/deveshdubey23/upfluence-dashboard.git](https://github.com/deveshdubey23/upfluence-dashboard.git)
+git clone https://github.com/deveshdubey23/upfluence-dashboard.git
 cd upfluence-dashboard
 ```
 2. Install dependency assets:
