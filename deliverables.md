@@ -64,7 +64,7 @@ Task: Provide a code structure that builds our master metric—the Upfluence Syn
 > *"Write a secure data handler. If the live Upfluence database throws a connection error or hits sandbox data caps during presentations, defensively intercept the crash. Instead of letting the dashboard go blank or break, smoothly hot-swap the background feed to a reliable, built-in fallback dataset so the user experience stays 100% up, responsive, and uninterrupted."*
 
 ### Prompt 3: Enterprise UX Adjustments
-> *"Upgrade our user experience features with three additions:
+> "Upgrade our user experience features with three additions:
 
 Allow the user to select and compare more than 2 creators side-by-side in a dynamic matchup grid.
 
